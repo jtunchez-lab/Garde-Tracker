@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple grade tracker for managing classes and assignment scores.">
+  <title>Grade Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Grade Tracker home">
+      <span class="brand-mark">G</span>
+      <span>Grade Tracker</span>
+    </a>
+    <button id="theme-toggle" class="button button-quiet" type="button" aria-label="Switch color theme">
+      <span id="theme-icon" aria-hidden="true">☾</span>
+      <span id="theme-label">Dark mode</span>
+    </button>
+  </header>
+
+  <main class="page-shell">
+    <section class="welcome-section" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">YOUR SCHOOL DASHBOARD</p>
+        <h1 id="page-title">My grades</h1>
+        <p class="muted">Keep your assignments organized and see how you're doing.</p>
+      </div>
+      <div class="average-card">
+        <span class="average-label">Overall average</span>
+        <strong id="overall-average">—</strong>
+        <span id="average-caption" class="average-caption">No graded assignments yet</span>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Assignment summary">
+      <article class="stat-card">
+        <span class="stat-label">Total assignments</span>
+        <strong id="total-count">0</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">Graded</span>
+        <strong id="graded-count">0</strong>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">Still waiting</span>
+        <strong id="pending-count">0</strong>
+      </article>
+    </section>
+
+    <section class="workspace" aria-label="Manage assignments">
+      <section class="panel form-panel" aria-labelledby="form-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">ASSIGNMENT DETAILS</p>
+            <h2 id="form-title">Add an assignment</h2>
+          </div>
+        </div>
+
+        <form id="assignment-form">
+          <label for="assignment-name">Assignment name</label>
+          <input id="assignment-name" name="assignmentName" type="text" maxlength="70"
+                 placeholder="e.g. Chapter 4 test" required>
+
+          <label for="class-name">Class</label>
+          <input id="class-name" name="className" type="text" maxlength="40"
+                 placeholder="e.g. Biology" required>
+
+          <div class="form-row">
+            <div>
+              <label for="earned-points">Points earned</label>
+              <input id="earned-points" name="earnedPoints" type="number" min="0" step="any"
+                     placeholder="e.g. 45">
+            </div>
+            <div>
+              <label for="possible-points">Points possible</label>
+              <input id="possible-points" name="possiblePoints" type="number" min="0.01" step="any"
+                     placeholder="e.g. 50">
+            </div>
+          </div>
+
+          <p class="field-hint">Leave both score fields empty if the assignment has not been graded.</p>
+          <div class="form-actions">
+            <button id="save-button" class="button button-primary" type="submit">Add assignment</button>
+            <button id="cancel-edit" class="button button-quiet hidden" type="button">Cancel</button>
+          </div>
+          <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel assignments-panel" aria-labelledby="assignments-title">
+        <div class="list-heading">
+          <div>
+            <p class="eyebrow">YOUR WORK</p>
+            <h2 id="assignments-title">Assignments</h2>
+          </div>
+          <span id="visible-count" class="count-pill">0 items</span>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-wrap" for="search-input">
+            <span aria-hidden="true">⌕</span>
+            <input id="search-input" type="search" placeholder="Search assignments or classes...">
+          </label>
+          <label class="visually-hidden" for="filter-select">Filter assignments</label>
+          <select id="filter-select">
+            <option value="all">All assignments</option>
+            <option value="graded">Graded</option>
+            <option value="pending">Not graded</option>
+          </select>
+        </div>
+
+        <div id="assignment-list" class="assignment-list" aria-live="polite"></div>
+        <p id="empty-state" class="empty-state">No assignments yet. Add your first assignment using the form.</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Your grades are saved in this browser using localStorage.</p>
+  </footer>
+</body>
+</html>
